@@ -1,0 +1,6 @@
+
+Below is a template to make creating new pages easier. If you've edited Wikipedia or used other MediaWiki sites before, this should be familiar to you. If not, check out this <span class="open-link-in-new-window">[https://www.mediawiki.org/wiki/Help:Formatting Formatting]</span> page for help with editing.
+
+The top "infobox" section inside the double curly braces is used to generate semantic data for the map application and for other purposes.
+* you can leave "coordinates" blank and it will be filled in automatically based on address
+* dates should be YYYY or YYYY/MM or YYYY/MM/DD

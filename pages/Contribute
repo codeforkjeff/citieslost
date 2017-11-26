@@ -1,0 +1,14 @@
+
+Does the place you want to add already exist in this wiki? Use the search box to check.
+
+To add a new place, enter its name below and click the button. You'll be taken to a template you can fill out.
+
+<inputbox>
+type=create
+preload=Template:Place_Preload
+preloadparams[] = ?
+editintro=CitiesLost:NewPlaceInstructions
+width=100
+break=no
+buttonlabel=Create page
+</inputbox>

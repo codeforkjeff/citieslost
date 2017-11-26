@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Cities Lost - Map</title>
+	<meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <!--
+	<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+    -->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="bootstrap3-typeahead.min.js"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>
+
+    <script src="map.js"></script>
+
+    <script>
+     $(document).ready(function() {
+         $("#map").citiesLostMap();
+     });
+    </script>
+
+    <style>
+     body {
+         padding: 0;
+         margin: 0;
+         padding-top: 50px;
+     }
+     html, body {
+         height: 100%;
+         width: 100%;
+     }
+
+     .navbar {
+         margin-bottom: 0;
+     }
+     .dropdown-menu {
+         width: 100%;
+     }
+     .cl-navbar-form {
+         padding: 10px 10px;
+     }
+
+     .container-map {
+         height: 100%;
+         width: 100%;
+         padding-right: 0;
+         padding-left: 0;
+     }
+     .container-map .row {
+         height: 100%;
+         margin-right: 0;
+         margin-left: 0;
+     }
+     .container-map .col-md-1,
+     .container-map .col-md-2,
+     .container-map .col-md-3,
+     .container-map .col-md-4,
+     .container-map .col-md-5,
+     .container-map .col-md-6,
+     .container-map .col-md-7,
+     .container-map .col-md-8,
+     .container-map .col-md-9,
+     .container-map .col-md-10,
+     .container-map .col-md-11,
+     .container-map .col-md-12 {
+         padding-right: 0;
+         padding-left: 0;
+     }
+     #place-detail {
+         margin-bottom: 0;
+         height: 100%;
+         overflow-y: auto;
+     }
+
+     #map {
+/*         width: 100%; */
+         height: 100%;
+     }
+
+     .place-content h1 {
+         margin-top: 10px;
+         font-size: 26px;
+     }
+     .place-content h2 {
+         font-size: 20px;
+     }
+
+     table.mw-capiunto-infobox  {
+         border-spacing: 0;
+         margin-bottom: 15px;
+     }
+     .mw-capiunto-infobox th {
+         vertical-align: top;
+         text-align: left;
+         padding-right: 6px;
+     }
+
+     .mw-editsection {
+         display: none;
+     }
+     
+     .static-map {
+         display: none;
+     }
+     
+     @media (min-width: 768px) {
+         #search {
+             width: 400px;
+         }
+     }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <!-- navbar-form messes this up, so we create our own -->
+                <form id="search-form" class="cl-navbar-form navbar-brand">
+                    <div class="form-group has-feedback">
+                        <input type="text" class="form-control" id="search" placeholder="Search">
+                        <span class="form-control-feedback glyphicon glyphicon-search" aria-hidden="true"></span>
+                    </div>
+                </form>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                     <li><a href="/w"><span class="site-name">Cities Lost</span> Wiki</a></li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+    </nav>
+
+    <div class="container container-map">
+        <div class="row">
+            <div id="place-detail" class="col-md-4 col-xs-12 panel panel-default hide">
+                <div class="panel-body">
+                    <button type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div class="place-content"></div>
+                    <div class="wiki-link-container">
+                        <a target="_blank" class="wiki-link" href="#">View/Edit Wiki Page</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12" id="map"></div>
+        </div>
+    </div>
+
+</body>
+</html>

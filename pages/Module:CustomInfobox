@@ -1,0 +1,54 @@
+local p = {}
+
+function p.escape (s)
+   s = string.gsub(s, "([&=+%c])", function (c)
+                      return string.format("%%%02X", string.byte(c))
+   end)
+   s = string.gsub(s, " ", "+")
+   return s
+end
+
+function p.tchelper(first, rest)
+  return first:upper()..rest:lower()
+end
+
+function p.title_case(str)
+  str = str:gsub("_", " "):gsub("(%a)([%w_']*)", p.tchelper)
+  return str
+end
+
+function p.draw()
+    local capiunto = require 'capiunto'
+    infobox = capiunto.create()
+    -- infobox:addHeader('A header between the data rows' )
+    local parent = mw.getCurrentFrame():getParent()
+    for n,v in parent:argumentPairs() do
+      infobox:addRow(p.title_case(n), v)
+    end
+
+    map = ""
+    if parent.args['coordinates'] then
+       map_link = "[" .. mw.site.server .. "/map?goto="
+          .. p.escape(mw.title.getCurrentTitle().fullText)
+          .. " View on Interactive Map]"
+       map_coords = (parent.args['coordinates'] or ""):gsub(" ", "")
+       index_comma = map_coords:find(",")
+       if index_comma then
+          map_coords = map_coords:sub(index_comma + 1)
+             .. ","
+             .. map_coords:sub(1, index_comma - 1)
+          map = "<div class='static-map'>"
+             .. "<img src='https://api.mapbox.com/styles/v1/mapbox/streets-v10/static/pin-s("
+             .. map_coords .. ")/" .. map_coords
+             .. ",13/250x150?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw'/>"
+             .. tostring(map_link)
+             .. "</div>"
+       end
+    end
+    
+    return "<div class='infobox-container'>"
+       .. tostring( infobox:getHtml() )
+       .. map
+       .. "</div>"
+end
+return p

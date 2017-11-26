@@ -1,0 +1,20 @@
+This site is running the Cities Lost platform. If you're seeing this
+page when loading the site, you should create a new page for your
+city, and change [[MediaWiki:Mainpage]] to point to that page instead
+of this one.
+
+This platform consists of 2 parts:
+
+* A wikipedia-like site (running MediaWiki) where contributors can easily add and edit information about places lost.
+
+* An interactive map with search and filtering.
+
+== Getting the Software ==
+
+You can get the source code here: TODO
+
+== Credits ==
+
+The idea for this project was inspired by [[Ghosts of Seattle Past]].
+
+__NOTOC__

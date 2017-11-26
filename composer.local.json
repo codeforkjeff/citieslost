@@ -1,0 +1,7 @@
+{
+        "require": {
+            "mediawiki/semantic-media-wiki": "2.5.5",
+            "mediawiki/scribunto": "dev-REL1_29",
+            "mediawiki/maps": "5.0.2"
+        }
+}

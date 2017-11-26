@@ -1,0 +1,28 @@
+{{Infobox place
+|description = very short description of this place
+|address = 123 Main St
+|coordinates = $1
+|date_opened = ?
+|date_closed = ?
+|reason_closed = ?
+|replaced_by = ?
+}}
+A description of the place should be at the top here. It can be a few
+paragraphs long.
+
+== History ==
+
+The history of the place, including ownership, events, changes.
+
+== Memories ==
+
+This section is for personal memories, notes, and other info that
+doesn't belong in the other sections. Sign your name using two dashes
+at the end of a paragraph, like this. -- Jeff
+
+== Links ==
+
+[https://example.com/sample Sample link text]
+
+[[Category:Place]]
+[[Category:Lost]]

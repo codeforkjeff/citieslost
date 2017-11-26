@@ -1,0 +1,11 @@
+.infobox-container {
+    float: right;
+}
+.static-map {
+    text-align: center;
+    margin: 0.5em 0 0.5em 1em;
+}
+.static-map img {
+    display: block;
+    margin: auto;
+}
