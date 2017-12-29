@@ -33,8 +33,11 @@ platform. To build it, run:
 docker build -t citieslost:latest .
 ```
 
-COMING SOON: a repo with a complete docker-compose configuration that
-you can use as a template.
+## Running and Customizing the Platform
+
+See the [seattlelost](https://github.com/codeforkjeff/seattlelost)
+repo for an example of how to run and customize the citieslost
+platform for your own city.
 
 ## Notes
 
